@@ -7,12 +7,6 @@
 
 @lucajung/json2table is a utility library for rendering data as HTML tables with customizable grouping. It provides a simple API to convert arrays of data into HTML table elements with grouped rows based on specific keys.
 
-## Features
-
-- Render data as HTML tables.
-- Customize table grouping.
-- Support for rowspan calculations in the rendered table.
-- Easy-to-use and well-documented API.
 
 ## Installation
 
@@ -56,6 +50,16 @@ const tableElement = render(data, config);
 // Append the table to an HTML element
 document.getElementById('table-container').appendChild(tableElement);
 ```
+
+## Features
+
+- Render data as HTML tables.
+- Customize table grouping.
+- Support for rowspan calculations in the rendered table.
+- Easy-to-use and well-documented API.
+
+## Demo
+Take a look at the [Demo](https://lucajung.github.io/json2table/)
 
 ## API
 
