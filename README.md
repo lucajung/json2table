@@ -1,6 +1,6 @@
 # @lucajung/json2table
 
-[![npm version](https://badge.fury.io/js/@lucajung/json2table.svg)](https://www.npmjs.com/package/@lucajung/json2table)
+[![npm version](https://badge.fury.io/js/@lucajung%2Fjson2table.svg)](https://badge.fury.io/js/@lucajung%2Fjson2table)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Description

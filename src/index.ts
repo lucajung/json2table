@@ -40,7 +40,7 @@ export function render(data: Array<TableItem>, config: Config = {}): HTMLTableEl
 function getHeader(data: Array<ComputedTableItem>): Array<string> {
     const header: Array<string> = [];
     data[0].keys.forEach(key => {
-        if (!header.includes(key)) {
+        if (header.indexOf(key) === -1) {
             header.push(key);
         }
     });
