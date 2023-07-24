@@ -1,0 +1,40 @@
+{
+  "name": "@lucajung/json2table",
+  "version": "0.0.1",
+  "description": "An package for quick and easy formatting of JSON data as HTML tables.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucajung/json2table.git"
+  },
+  "keywords": [
+    "json",
+    "html",
+    "table",
+    "formatting",
+    "rowspan",
+    "colspan",
+    "DOM",
+    "web"
+  ],
+  "author": {
+    "name": "Luca Jung",
+    "email": "dev@luca-jung.de",
+    "url": "https://luca-jung.de"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucajung/json2table/issues"
+  },
+  "homepage": "https://github.com/lucajung/json2table#readme",
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "typescript": "^5.1.6"
+  }
+}
