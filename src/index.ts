@@ -66,7 +66,7 @@ function getHeader(data: Array<ComputedTableItem>): Array<string> {
 */
 function createHTMLTable(data: Array<ComputedTableItem>, keys: Array<string>, groupingKeys: Array<string>, classNames: ClassNames): HTMLTableElement {
     const table = document.createElement('table');
-    table.classList.add(classNames.tableClass);
+    classNames.tableClass.split(' ').forEach(className => table.classList.add(className));
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
     table.appendChild(thead);
