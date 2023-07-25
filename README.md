@@ -42,6 +42,7 @@ const data = [
 // Optional configuration
 const config = {
   group: ['Country'], // Array of keys to group the data by
+  tableClass: 'bold-table'
 };
 
 // Render the data as an HTML table
@@ -72,6 +73,7 @@ Take a look at the [Demo](https://lucajung.github.io/json2table/)
 - `data` (Array<TableItem>): An array of objects, where each object represents a row in the table.
 - `config` (Config) [Optional]: An optional configuration object for customizing the rendering. It supports the following properties:
   - `group` (Array<string>): An array of keys by which to group the table rows.
+  - `tableClass` (string): Specifies the name of the table class
 
 **Returns:**
 

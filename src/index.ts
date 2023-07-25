@@ -1,6 +1,7 @@
 import { ComputedTableItem } from "./types/ComputedTableItem";
 import { Config } from "./types/Config";
 import { TableItem } from "./types/TableItem";
+import { ClassNames } from "./types/ClassNames";
 
 /**
  * Renders a HTML table based on the provided data and configuration.
@@ -17,18 +18,27 @@ export function render(data: Array<TableItem>, config: Config = {}): HTMLTableEl
     });
 
     let computedData = reformat(data, Array.from(keys));
+    const groupingKeys: Array<string> = [];
+    const classNames: ClassNames = {
+        tableClass: '',
+    }
 
     if (config.hasOwnProperty('group') && config.group !== undefined) {
         const group = config.group;
         for (let i = 0; i < group.length; i++) {
             const element = group[i];
             groupBy(computedData, element);
+            groupingKeys.push(element);
         }
+    }
+
+    if (config.hasOwnProperty('tableClass') && config.tableClass !== undefined) {
+        classNames.tableClass = config.tableClass;
     }
 
     const header: Array<string> = getHeader(computedData);
 
-    return createHTMLTable(computedData, header);
+    return createHTMLTable(computedData, header, groupingKeys, classNames);
 }
 
 /**
@@ -54,8 +64,9 @@ function getHeader(data: Array<ComputedTableItem>): Array<string> {
 * @param keys - An array of strings representing the header labels for the table.
 * @returns The HTMLTableElement representing the rendered table.
 */
-function createHTMLTable(data: Array<ComputedTableItem>, keys: Array<string>): HTMLTableElement {
+function createHTMLTable(data: Array<ComputedTableItem>, keys: Array<string>, groupingKeys: Array<string>, classNames: ClassNames): HTMLTableElement {
     const table = document.createElement('table');
+    table.classList.add(classNames.tableClass);
     const thead = document.createElement('thead');
     const tbody = document.createElement('tbody');
     table.appendChild(thead);
@@ -69,7 +80,7 @@ function createHTMLTable(data: Array<ComputedTableItem>, keys: Array<string>): H
     });
     thead.appendChild(tr);
 
-    calculateRowSpan(data).forEach(row => {
+    calculateRowSpan(data, groupingKeys).forEach(row => {
         const trBody = document.createElement('tr');
         row.forEach(value => {
             const td = document.createElement('td');
@@ -137,23 +148,25 @@ function groupBy(data: Array<ComputedTableItem>, key: string) {
     });
 }
 
-function calculateRowSpan(data: Array<ComputedTableItem>): Array<Array<{value: string, rowSpan: number}>>{
+function calculateRowSpan(data: Array<ComputedTableItem>, keys: Array<string>): Array<Array<{value: string, rowSpan: number}>>{
     const result: Array<Array<{value: string, rowSpan: number}>> = data[0].keys.map(x => []);
 
     for (let i = 0; i < data[0].keys.length; i++) {
-        let lastValue = data[data.length - 1].values[i];
+        const addWithoutRowSpan = keys.indexOf(data[0].keys[i]) === -1;
+        
         let rowSpan = 1;
-        for (let k = data.length - 1; k >= 0; k--) {
-            const element = data[k];
-            if(element.values[i] !== lastValue || k === 0){
-                result[i].push({value: element.values[i], rowSpan: rowSpan});
+        for (let k = data.length - 1; k > 0; k--) {
+            const currentValue = data[k].values[i];
+            const nextValue = data[k - 1].values[i];
+            if(currentValue !== nextValue || k === 0 || addWithoutRowSpan){
+                result[k].push({value: currentValue, rowSpan: rowSpan});
                 rowSpan = 1;
             }
             else {
-                result[i].push({value: element.values[i], rowSpan: 1});
                 rowSpan++;
             }
         }
+        result[0].push({value: data[0].values[i], rowSpan: rowSpan});
     }
 
     return result;
