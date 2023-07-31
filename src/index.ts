@@ -149,7 +149,7 @@ function groupBy(data: Array<ComputedTableItem>, key: string) {
 }
 
 function calculateRowSpan(data: Array<ComputedTableItem>, keys: Array<string>): Array<Array<{value: string, rowSpan: number}>>{
-    const result: Array<Array<{value: string, rowSpan: number}>> = data[0].keys.map(x => []);
+    const result: Array<Array<{value: string, rowSpan: number}>> = data.map(x => []);
 
     for (let i = 0; i < data[0].keys.length; i++) {
         const addWithoutRowSpan = keys.indexOf(data[0].keys[i]) === -1;

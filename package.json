@@ -1,6 +1,6 @@
 {
   "name": "@lucajung/json2table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An package for quick and easy formatting of JSON data as HTML tables.",
   "exports": {
     ".": {
